@@ -15,7 +15,7 @@ export default function Home() {
           <Link href="/rooms" className="hover:text-blue-600">
             Rooms
           </Link>
-          <Link href="/bookings" className="hover:text-blue-600">
+          <Link href="/booking" className="hover:text-blue-600">
             Bookings
           </Link>
         </div>
@@ -39,7 +39,7 @@ export default function Home() {
           </Link>
 
           <Link
-            href="/bookings"
+            href="/booking"
             className="border border-blue-600 text-blue-600 px-6 py-3 rounded-lg hover:bg-blue-50 transition"
           >
             Manage Bookings

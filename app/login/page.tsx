@@ -1,7 +1,9 @@
 'use client'
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 const Login = () => {
   const [error, setError] = useState<null | String>(null)
+  const router = useRouter();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
@@ -19,10 +21,16 @@ const Login = () => {
     })
 
     const data = await res.json()
+    // console.log(data)
     if (data.error) {
-      setError(error)
+      setError(data.error)
     } else {
-      setError(null)
+      if (data.user.role === "admin") {
+        router.push('/admin')
+      }
+      else {
+        router.push('/')
+      }
     }
   }
 
@@ -30,7 +38,7 @@ const Login = () => {
     <div className="w-full max-w-md bg-white border rounded-2xl shadow-sm p-8">
       <h2 className="text-2xl font-semibold text-center mb-6">Login</h2>
       {error && (
-        <div className="text"></div>
+        <div className="bg-red-100 text-red-600 px-4 py-2 rounded-xl text-sm">{error}</div>
       )}
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <input

@@ -14,7 +14,15 @@ export async function POST(req: Request) {
     return Response.json({ error: "Username or password is incorrect" })
   }
   const users = rows[0]
-  Response.json({
+  console.log({
+    message: "Login Success",
+    user: {
+      id: users.user_id,
+      role: users.role,
+      name: users.name
+    }
+  })
+  return Response.json({
     message: "Login Success",
     user: {
       id: users.user_id,
