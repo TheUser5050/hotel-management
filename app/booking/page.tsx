@@ -1,5 +1,6 @@
 'use client'
 
+import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 
 type Room = {
@@ -15,7 +16,8 @@ const BookingPage = () => {
   const [checkIn, setCheckIn] = useState("")
   const [checkOut, setCheckOut] = useState("")
   const [message, setMessage] = useState("")
-
+  const [userid, setuserid] = useState<Number | null>(null)
+  const router = useRouter()
   useEffect(() => {
     const fetchRooms = async () => {
       const res = await fetch('/api/rooms')
@@ -24,6 +26,11 @@ const BookingPage = () => {
     }
 
     fetchRooms()
+    const user = JSON.parse(localStorage.getItem("user_id") || "{}")
+    setuserid(user.id)
+    if (userid == null) {
+      router.push("/login")
+    }
   }, [])
 
   const handleBooking = async () => {
@@ -31,18 +38,17 @@ const BookingPage = () => {
       setMessage("Please fill all fields")
       return
     }
-
     const res = await fetch('/api/booking', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        user_id: 1,
+        user_id: userid,
         room_id: selectedRoom,
         check_in: checkIn,
         check_out: checkOut
       })
     })
-
+    // console.log(userid)
     const data = await res.json()
     setMessage(data.message)
   }

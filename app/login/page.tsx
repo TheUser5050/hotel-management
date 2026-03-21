@@ -25,6 +25,7 @@ const Login = () => {
     if (data.error) {
       setError(data.error)
     } else {
+      localStorage.setItem("user_id", JSON.stringify(data.user_id))
       if (data.user.role === "admin") {
         router.push('/admin')
       }
