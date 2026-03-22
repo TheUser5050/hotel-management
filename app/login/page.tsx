@@ -1,9 +1,16 @@
 'use client'
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 const Login = () => {
   const [error, setError] = useState<null | String>(null)
   const router = useRouter();
+  useEffect(() => {
+    const user = localStorage.getItem("id")
+    if (typeof user == "string") {
+      router.push("/")
+    }
+    console.log(typeof user)
+  }, [])
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
@@ -27,6 +34,7 @@ const Login = () => {
       setError(data.error)
     } else {
       localStorage.setItem("id", JSON.stringify(user_id))
+      localStorage.setItem("role", JSON.stringify(data.user.role))
       if (data.user.role === "admin") {
         router.push('/admin')
       }

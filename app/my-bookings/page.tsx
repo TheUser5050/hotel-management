@@ -41,7 +41,7 @@ const MyBookings = () => {
     })
 
     const data = await res.json()
-
+    console.log(data)
     if (data.message) {
       // refresh list
       const user = JSON.parse(localStorage.getItem("id") || "{}")

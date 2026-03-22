@@ -24,7 +24,7 @@ export async function POST(req: Request) {
 
     // ✅ make room available again
     await db.query(
-      "UPDATE room SET status = 'available' WHERE room_id = ?",
+      "UPDATE rooms SET status = 'available' WHERE room_id = ?",
       [room_id]
     )
 
