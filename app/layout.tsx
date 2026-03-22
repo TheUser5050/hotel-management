@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Vault",
-  description: "Your secrents will remain secret in our vault",
+  title: "HotelGaazu",
+  description: "Feel your hoem in your favourite place",
 };
 
 export default function RootLayout({

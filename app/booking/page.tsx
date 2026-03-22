@@ -26,9 +26,10 @@ const BookingPage = () => {
     }
 
     fetchRooms()
-    const user = JSON.parse(localStorage.getItem("user_id") || "{}")
-    setuserid(user.id)
-    if (userid == null) {
+    const user = JSON.parse(localStorage.getItem("id") || "{}")
+    console.log(user)
+    setuserid(user)
+    if (typeof user != "number") {
       router.push("/login")
     }
   }, [])
@@ -51,6 +52,8 @@ const BookingPage = () => {
     // console.log(userid)
     const data = await res.json()
     setMessage(data.message)
+    console.log(data)
+    router.push('/my-bookings')
   }
 
   return (

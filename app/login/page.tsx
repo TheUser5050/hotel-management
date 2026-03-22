@@ -21,11 +21,12 @@ const Login = () => {
     })
 
     const data = await res.json()
-    // console.log(data)
+    const user_id = data.user.id
+    console.log(user_id)
     if (data.error) {
       setError(data.error)
     } else {
-      localStorage.setItem("user_id", JSON.stringify(data.user_id))
+      localStorage.setItem("id", JSON.stringify(user_id))
       if (data.user.role === "admin") {
         router.push('/admin')
       }
@@ -65,7 +66,7 @@ const Login = () => {
       </form>
 
       <p className="text-sm text-gray-500 text-center mt-4">
-        Don’t have an account? <span className="text-black font-medium cursor-pointer">Sign up</span>
+        Don’t have an account? <a className="text-black font-medium cursor-pointer" href="/signup">Sign up</a>
       </p>
     </div>
   </main>
